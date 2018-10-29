@@ -2,7 +2,7 @@
 Vue.component('my-commit', {
     template: `
     <div class="commit"> 
-        <p class="commit__head">{{ iteration }}: <a @click="showCommit(commit)">{{ commit.message }}</a></p>
+        <p class="commit__head">{{ iteration }}: <a @click="showCommit(commit)">{{ cutMessage(commit.message) }}</a></p>
         <transition name="fade">
             <div 
                 class="commit__info" 
@@ -12,7 +12,7 @@ Vue.component('my-commit', {
                     <li>E-mail: {{ commitInfo.author.email }}</li>
                     <li>Date: {{ getDate() }}</li>
                     <li>Time: {{ getTime() }}</li>
-                    <li>Message: {{ getMessage() }}</li>
+                    <li>Message: {{ commitInfo.message }}</li>
                     <li><a :href="commitInfo.url">Get more info</a></li>
                 </ul>
             </div>
@@ -39,9 +39,12 @@ Vue.component('my-commit', {
             let time = this.commitInfo.author.date.split('T')[1];
             return time.slice(0, time.length - 1);
         },
-        getMessage() {
-            let message = commitInfo.message;
-            return message.slice(0, 10) + "..."
+        cutMessage(msg) {
+            if(msg.length > 40) {
+                return msg.slice(0, 40) + "..."
+            } else {
+                return msg;
+            }
         }
     }
 })

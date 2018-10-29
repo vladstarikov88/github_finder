@@ -38,7 +38,7 @@
                 <transition name="fade">
                     <div class="application" v-if="error.status">
                         <h2>Error</h2>
-                        <p>User or repository does not exist</p>
+                        <p v-if="error.code !== 200">User or repository does not exist</p>
                         <p v-if="error.code">Status code: {{ error.code }}</p>
                     </div>
                 </transition>
