@@ -11,19 +11,7 @@
 <body>
 
     <div id="wrapper">
-
-        <!-- <input type="text" class="input" id="searchUser" placeholder="Имя пользователя" value="vladstarikov88">
-        <input type="text" class="input" id="searchRepo" placeholder="Название репозитория" value="broutonlab">
-
-
-        <button class="btn searchUser">искать пользотвателя</button>
-        <button class="btn searchRepo">искать репо</button>
         
-        <div class="main__profile-name"></div>
-        <div class="main__profile-username"></div>
-        <div class="main__profile-repos"></div>
-        <div class="main__profile-url"></div> -->
-
         <section class="app" id="finder_app">
             <div class="app_head">
                 <h1>GitHub Finder App</h1>
@@ -43,33 +31,30 @@
                     <button class="btn" @click="searchRepo">искать репо</button>
                 </div>
 
-                <div class="application">
-                    <h2>User Info</h2>
+                <transition name="fade">
+                    <div class="application" v-if="show.user">
+                        <h2>User Info</h2>
 
-                    <ol>
-                        <li v-for="item in userInfo"> {{ item }} </li>
-                    </ol>
-                    
-                </div>
+                        <ol>
+                            <li v-for="item in userInfo"> {{ item }} </li>
+                        </ol>
+                        
+                    </div>
+                </transition>
 
-                <div class="application">
-                    <h2>Commits info</h2>
+                <transition name="fade">
+                    <div class="application" v-if="show.commits">
+                        <h2>Commits info</h2>
 
-                    <p>Click to get more info</p>
-                    <ol>
-                        <li v-for="item in commitsInfo" @click="getCommitInfo(item.commit)"><a>{{ item.commit.message }}</a></li>
-                    </ol>
-                </div>
+                        <p>Click to get more info</p>
 
-                <div class="application">
-                    <h2>Commit info</h2>
-
-                    <ol>
-                        <li v-for="item in commitInfo.author"> {{ item }}</li>
-                        <li>{{ commitInfo.message }}</li>
-                        <li>{{ commitInfo.url }}</li>
-                    </ol>
-                </div>
+                        <my-commit
+                            v-for="(item, i) in commitsInfo"
+                            :commit="item.commit"
+                            :iteration="i">
+                        </my-commit>
+                    </div>
+                </transition>
 
             </div>
         </section>
