@@ -12,7 +12,7 @@
 
     <div id="wrapper">
 
-        <input type="text" class="input" id="searchUser" placeholder="Имя пользователя" value="vladstarikov88">
+        <!-- <input type="text" class="input" id="searchUser" placeholder="Имя пользователя" value="vladstarikov88">
         <input type="text" class="input" id="searchRepo" placeholder="Название репозитория" value="broutonlab">
 
 
@@ -22,45 +22,33 @@
         <div class="main__profile-name"></div>
         <div class="main__profile-username"></div>
         <div class="main__profile-repos"></div>
-        <div class="main__profile-url"></div>
-    </div>
+        <div class="main__profile-url"></div> -->
 
+        <section class="app">
+            <div class="app_head">
+                <h1>GitHub Finder App</h1>
+            </div>
+            <div class="app_flex">
 
-    <main id="main">
+                <div class="application">
+                    <h2>Поиск:</h2>
+                    <input type="text" class="input" id="searchUser" placeholder="Имя пользователя" value="vladstarikov88">
+                    <input type="text" class="input" id="searchRepo" placeholder="Название репозитория" value="broutonlab">
 
-        <article id="edu">
-            <section class="app" id="introduction">
-                <div class="app_head">
-                    <h1>Введение</h1>
+                    <button class="btn searchUser">искать пользотвателя</button>
+                    <button class="btn searchRepo">искать репо</button>
                 </div>
-                <div class="app_flex">
 
-                    <div id="app1" class="application">
-                        <h2>Деклоративный рендеринг</h2>
-                        <span>{{ message }}</span>
-                    </div>
-            
-                    <div id="app2" class="application">
-                        <h2>Связка атрибутов элементов через <code>v-bind</code></h2>
-                        <span v-bind:title="message">Узнать время загрузки страницы</span>
-                    </div>
-            
-                    <div id="app3" class="application">
-                        <h2>Условия <code>v-if</code></h2>
-                        <span v-if="seen">Сейчас меня видно</span>
-                    </div>
-            
-                    <div id="app4" class="application">
-                        <h2>Цкил <code>v-for</code></h2>
-                        <ol>
-                            <li v-for="todo in arr">
-                                {{todo.text}}
-                            </li>
-                        </ol>
-                    </div>
+                <div class="application">
+                    
                 </div>
-            </section>
-        </article>
+
+                <div class="application">
+                    
+                </div>
+
+            </div>
+        </section>
 
     </main>
 
