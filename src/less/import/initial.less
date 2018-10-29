@@ -1,0 +1,58 @@
+/* fonts */
+@font-face {
+    font-family: 'OpenSans-Bold';
+    src: url('/fonts/OpenSans-Bold.ttf');
+    font-weight: normal;
+    font-style:  normal;
+}
+@font-face {
+    font-family: 'OpenSans-Regular';
+    src: url('/fonts/OpenSans-Regular.ttf');
+    font-weight: normal;
+    font-style:  normal;
+}
+
+@OpenSans--bold: 'OpenSans-Bold', sans-serif;
+@OpenSans--regular: 'OpenSans-Regular', sans-serif;
+
+/* colors */
+@white: #F7F8F8;
+@grey: #373C43;
+@blue: #00AEEF;
+@blue--dark: #1F2229;
+@green: #95BF00;
+@purple: #9A47B9;
+@text: #383D43;
+@black: #000;
+
+@text--dark: #193945;
+
+@link__bg--active: #2A2D37;
+@link__bg--hover: lighten(@blue--dark, 5%);
+
+
+/* variables for @media */
+@md: 1000px;
+@sm: 768px;
+@xs: 480px;
+@qw: 320px;
+
+@mq: 850px;
+@sq: 600px;
+
+/* clear styles */
+html, body, div, span, iframe,
+h1, h2, h3, h4, h5, h6, p,
+a, address, img,
+small, strong, sub, sup,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details,
+figure, footer, header,
+menu, nav, output, section,
+audio, video {
+    margin: 0;
+    padding: 0;
+    vertical-align: baseline;
+}
