@@ -20,30 +20,52 @@
 
                 <div class="application">
                     <h2>Search:</h2>
-                    <input 
-                        placeholder="Имя пользователя" 
-                        v-model="userName">
-                    <input 
-                        placeholder="Название репозитория" 
-                        v-model="userRepo">
+                    <div>
+                        <input 
+                            placeholder="Имя пользователя" 
+                            v-model="userName">
+                        <input 
+                            placeholder="Название репозитория" 
+                            v-model="userRepo">
+                    </div>
 
-                    <button class="btn" @click="searchUser">искать пользотвателя</button>
-                    <button class="btn" @click="searchRepo">искать репо</button>
+                    <div>
+                        <button class="btn" @click="searchUser">Search user</button>
+                        <button class="btn" @click="searchRepo">Search repo</button>
+                    </div>
                 </div>
 
                 <transition name="fade">
-                    <div class="application" v-if="show.user">
+                    <div class="application" v-if="error.status">
+                        <h2>Error</h2>
+                        <p>User or repository does not exist</p>
+                        <p v-if="error.code">Status code: {{ error.code }}</p>
+                    </div>
+                </transition>
+
+                <transition name="fade">
+                    <div class="application" v-if="show.user && !error.status">
                         <h2>User Info</h2>
 
-                        <ol>
-                            <li v-for="item in userInfo"> {{ item }} </li>
-                        </ol>
+                        <div class="user">
+                            <div class="user__pic">
+                                <img :src="userInfo.avatar_url" alt="">
+                            </div>
+                            <div class="user__info">
+                                <ol>
+                                    <li> {{ userInfo.name }} </li>
+                                    <li> {{ userInfo.bio }} </li>
+                                    <li> {{ userInfo.location }} </li>
+                                    <li> <a :href=userInfo.html_url target="_blank">GitHub profile</a></li>
+                                </ol>
+                            </div>
+                        </div>
                         
                     </div>
                 </transition>
 
                 <transition name="fade">
-                    <div class="application" v-if="show.commits">
+                    <div class="application" v-if="show.commits && !error.status">
                         <h2>Commits info</h2>
 
                         <p>Click to get more info</p>

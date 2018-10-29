@@ -12,7 +12,7 @@ Vue.component('my-commit', {
                     <li>E-mail: {{ commitInfo.author.email }}</li>
                     <li>Date: {{ getDate() }}</li>
                     <li>Time: {{ getTime() }}</li>
-                    <li>Message: {{ commitInfo.message }}</li>
+                    <li>Message: {{ getMessage() }}</li>
                     <li><a :href="commitInfo.url">Get more info</a></li>
                 </ul>
             </div>
@@ -38,6 +38,10 @@ Vue.component('my-commit', {
         getTime() {
             let time = this.commitInfo.author.date.split('T')[1];
             return time.slice(0, time.length - 1);
+        },
+        getMessage() {
+            let message = commitInfo.message;
+            return message.slice(0, 10) + "..."
         }
     }
 })
@@ -55,7 +59,8 @@ let fa = new Vue({
                 name: '',
                 bio: '',
                 location: '',
-                url: ''
+                html_url: '',
+                avatar_url: ''
             },
             commitsInfo: [],
             commitInfo: {},
@@ -63,39 +68,56 @@ let fa = new Vue({
             show: {
                 user: false,
                 commits: false
+            },
+            error: {
+                status: false, 
+                code: ''
             }
         }
     },
     methods: {
         searchUser() {
-            this.fetchUser(this.userName).then((res) => {
-                this.userInfo = objsCopy(res, this.userInfo);
+            fetch(`https://api.github.com/users/${this.userName}?client_id=${this.client_id}&clinent_secret=${this.clinent_secret}`)
+                .then( res => {
+                    if (res.status !== 200) {
+                        console.log(res.status);
+                        this.error.status = true;
+                        this.error.code = res.status;
+                        return;
+                    } 
+                    res.json().then( data => {
+                        this.userInfo = data;
 
-                console.log(res);
-                this.show.user = true;
-            });
+                        console.log(data);
+                        this.show.user = true;
+                        this.error.status = false;
+                    })
+                })
+                .catch(function(err) {  
+                    console.log('Fetch Error :-S', err);  
+                });
+            
         },
         searchRepo() {
-            this.fetchRepo(this.userName, this.userRepo).then((res) => {
-                this.commitsInfo = res;
+            fetch(`https://api.github.com/repos/${this.userName}/${this.userRepo}/commits?client_id=${this.client_id}&clinent_secret=${this.clinent_secret}`)
+            .then( res => {
+                if (res.status !== 200) {
+                    console.log(res.status);
+                    this.error.status = true;
+                    this.error.code = res.status;
+                    return;
+                } 
+                res.json().then( data => {
+                    this.commitsInfo = data;
 
-                console.log(res);
-                this.show.commits = true;
+                    console.log(data);
+                    this.show.commits = true;
+                    this.error.status = false;
+                })
+            })
+            .catch(function(err) {  
+                console.log('Fetch Error :-S', err);  
             });
-        },
-
-        /* Функции-запросы */
-        fetchUser: async (user) => {
-            const api_call = await fetch(`https://api.github.com/users/${user}?client_id=${this.client_id}&clinent_secret=${this.clinent_secret}`);
-            
-            const data = await api_call.json();
-            return data ;
-        },
-        fetchRepo: async (user, repo) => {
-            const api_call = await fetch(`https://api.github.com/repos/${user}/${repo}/commits?client_id=${this.client_id}&clinent_secret=${this.clinent_secret}`);
-
-            const data = await api_call.json();
-            return data;
         }
     }
 })
