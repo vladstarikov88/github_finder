@@ -10,10 +10,60 @@
 </head>
 <body>
 
-    <div id="wrapper" class="flex">
+    <div id="wrapper">
 
+        <input type="text" class="input" id="searchUser" placeholder="Имя пользователя" value="vladstarikov88">
+        <input type="text" class="input" id="searchRepo" placeholder="Название репозитория" value="broutonlab">
+
+
+        <button class="btn searchUser">искать пользотвателя</button>
+        <button class="btn searchRepo">искать репо</button>
         
+        <div class="main__profile-name"></div>
+        <div class="main__profile-username"></div>
+        <div class="main__profile-repos"></div>
+        <div class="main__profile-url"></div>
     </div>
+
+
+    <main id="main">
+
+        <article id="edu">
+            <section class="app" id="introduction">
+                <div class="app_head">
+                    <h1>Введение</h1>
+                </div>
+                <div class="app_flex">
+
+                    <div id="app1" class="application">
+                        <h2>Деклоративный рендеринг</h2>
+                        <span>{{ message }}</span>
+                    </div>
+            
+                    <div id="app2" class="application">
+                        <h2>Связка атрибутов элементов через <code>v-bind</code></h2>
+                        <span v-bind:title="message">Узнать время загрузки страницы</span>
+                    </div>
+            
+                    <div id="app3" class="application">
+                        <h2>Условия <code>v-if</code></h2>
+                        <span v-if="seen">Сейчас меня видно</span>
+                    </div>
+            
+                    <div id="app4" class="application">
+                        <h2>Цкил <code>v-for</code></h2>
+                        <ol>
+                            <li v-for="todo in arr">
+                                {{todo.text}}
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </section>
+        </article>
+
+    </main>
+
 
     <script src="js/index.js"></script>
 </body>
